@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylzs.cn.attend.dao.AttendMapper" >
+  <resultMap id="BaseResultMap" type="com.mylzs.cn.attend.entity.Attend" >
+    <id column="attend_id" property="attendId" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="attend_date" property="attendDate" jdbcType="DATE" />
+    <result column="attend_week" property="attendWeek" jdbcType="INTEGER" />
+    <result column="attend_moning" property="attendMoning" jdbcType="TIME" />
+    <result column="attend_evening" property="attendEvening" jdbcType="TIME" />
+    <result column="absence" property="absence" jdbcType="INTEGER" />
+    <result column="attend_status" property="attendStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    attend_id, uid, attend_date, attend_week, attend_moning, attend_evening, absence, 
+    attend_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from attend
+    where attend_id = #{attendId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from attend
+    where attend_id = #{attendId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylzs.cn.attend.entity.Attend" >
+    insert into attend (attend_id, uid, attend_date, 
+      attend_week, attend_moning, attend_evening, 
+      absence, attend_status)
+    values (#{attendId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{attendDate,jdbcType=DATE}, 
+      #{attendWeek,jdbcType=INTEGER}, #{attendMoning,jdbcType=TIME}, #{attendEvening,jdbcType=TIME}, 
+      #{absence,jdbcType=INTEGER}, #{attendStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mylzs.cn.attend.entity.Attend" >
+    insert into attend
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attendId != null" >
+        attend_id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="attendDate != null" >
+        attend_date,
+      </if>
+      <if test="attendWeek != null" >
+        attend_week,
+      </if>
+      <if test="attendMoning != null" >
+        attend_moning,
+      </if>
+      <if test="attendEvening != null" >
+        attend_evening,
+      </if>
+      <if test="absence != null" >
+        absence,
+      </if>
+      <if test="attendStatus != null" >
+        attend_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attendId != null" >
+        #{attendId,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="attendDate != null" >
+        #{attendDate,jdbcType=DATE},
+      </if>
+      <if test="attendWeek != null" >
+        #{attendWeek,jdbcType=INTEGER},
+      </if>
+      <if test="attendMoning != null" >
+        #{attendMoning,jdbcType=TIME},
+      </if>
+      <if test="attendEvening != null" >
+        #{attendEvening,jdbcType=TIME},
+      </if>
+      <if test="absence != null" >
+        #{absence,jdbcType=INTEGER},
+      </if>
+      <if test="attendStatus != null" >
+        #{attendStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mylzs.cn.attend.entity.Attend" >
+    update attend
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="attendDate != null" >
+        attend_date = #{attendDate,jdbcType=DATE},
+      </if>
+      <if test="attendWeek != null" >
+        attend_week = #{attendWeek,jdbcType=INTEGER},
+      </if>
+      <if test="attendMoning != null" >
+        attend_moning = #{attendMoning,jdbcType=TIME},
+      </if>
+      <if test="attendEvening != null" >
+        attend_evening = #{attendEvening,jdbcType=TIME},
+      </if>
+      <if test="absence != null" >
+        absence = #{absence,jdbcType=INTEGER},
+      </if>
+      <if test="attendStatus != null" >
+        attend_status = #{attendStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where attend_id = #{attendId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mylzs.cn.attend.entity.Attend" >
+    update attend
+    set uid = #{uid,jdbcType=INTEGER},
+      attend_date = #{attendDate,jdbcType=DATE},
+      attend_week = #{attendWeek,jdbcType=INTEGER},
+      attend_moning = #{attendMoning,jdbcType=TIME},
+      attend_evening = #{attendEvening,jdbcType=TIME},
+      absence = #{absence,jdbcType=INTEGER},
+      attend_status = #{attendStatus,jdbcType=INTEGER}
+    where attend_id = #{attendId,jdbcType=INTEGER}
+  </update>
+</mapper>
