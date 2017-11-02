@@ -23,4 +23,10 @@
     <script src="/static/js/html5shiv.min.js"></script>
     <script src="/static/js/respond.min.js"></script>
     <![endif]-->
+
+    <%--雨的加入--%>
+    <link rel="stylesheet" href="/static/rain/css/reset.min.css">
+
+
+    <link rel="stylesheet" href="/static/rain/css/style.css">
 </head>

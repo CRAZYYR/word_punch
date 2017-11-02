@@ -21,6 +21,17 @@
     from attend
     where attend_id = #{attendId,jdbcType=INTEGER}
   </select>
+  <!--查询打卡记录-->
+  <select id="selectTodaySingnRecord" parameterType="int" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM  attend
+    WHERE uid=#{uid}
+    AND  attend_date=CURRENT_DATE()
+
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from attend
     where attend_id = #{attendId,jdbcType=INTEGER}

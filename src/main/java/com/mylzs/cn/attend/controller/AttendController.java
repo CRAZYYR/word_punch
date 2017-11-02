@@ -4,14 +4,14 @@ import com.mylzs.cn.attend.entity.Attend;
 import com.mylzs.cn.attend.service.AttendService;
 import com.mylzs.cn.common.utils.MyException;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 /**
@@ -20,7 +20,7 @@ import java.util.Date;
 @Controller
 @RequestMapping("/attend")
 public class AttendController {
-
+Log  log= LogFactory.getLog(AttendController.class);
     @Autowired
     private AttendService attendService;
     /***
@@ -36,19 +36,17 @@ public class AttendController {
      *
      * @return
      */
-    @RequestMapping("/signAttend")
+    @RequestMapping(method = RequestMethod.POST,value = "/signAttend")
     @ResponseBody
-    public String signAttend(){
-    Attend attend=new Attend();
-    attend.setUid(1);
-        Date date=new Date();
-        date.getTime();
-    attend.setAttendDate(date);
-    attend.setAttendWeek(2);
-
+    public String signAttend(HttpServletRequest httpServletRequest){
+        Attend attend=new Attend();
+       String suid= httpServletRequest.getParameter("uid");
+       int uid=Integer.parseInt(suid);
+        attend.setUid(uid);
         try {
             attendService.signAttend(attend);
         }catch (Exception e){
+            log.debug(e);
         throw new MyException(e.getMessage());
         }
 

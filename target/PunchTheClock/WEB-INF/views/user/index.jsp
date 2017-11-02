@@ -31,7 +31,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-  <center style="padding-top: 200px;"> 欢迎登录管理页面!<%=str_date2%></center>
+    <jsp:include page="/WEB-INF/views/user/rain.jsp" flush="true"/>
   </div>
   <jsp:include page="/commonpage/footer.jsp" flush="true"/>
   <!-- /.control-sidebar -->
