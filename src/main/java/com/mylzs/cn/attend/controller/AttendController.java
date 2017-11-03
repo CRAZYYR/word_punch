@@ -1,8 +1,11 @@
 package com.mylzs.cn.attend.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.mylzs.cn.attend.entity.Attend;
 import com.mylzs.cn.attend.service.AttendService;
 import com.mylzs.cn.common.utils.MyException;
+import com.mylzs.cn.common.utils.page.PageQueryBean;
+import com.mylzs.cn.vo.QueryCondition;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.annotations.Param;
@@ -36,7 +39,7 @@ Log  log= LogFactory.getLog(AttendController.class);
      *
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST,value = "/signAttend")
+    @RequestMapping(value = "/signAttend")
     @ResponseBody
     public String signAttend(HttpServletRequest httpServletRequest){
         Attend attend=new Attend();
@@ -52,4 +55,18 @@ Log  log= LogFactory.getLog(AttendController.class);
 
         return "success";
 }
+
+    /**
+     * 分页查询
+     * @param queryCondition
+     * @return
+     */
+    @RequestMapping("/signList")
+    @ResponseBody
+    public PageQueryBean pageQueryBeanList( QueryCondition queryCondition){
+              PageQueryBean pageQueryBean = attendService.listAttend(queryCondition);
+
+              return  pageQueryBean;
+        }
+
 }

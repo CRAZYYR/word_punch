@@ -5,6 +5,8 @@ import com.mylzs.cn.attend.entity.Attend;
 import com.mylzs.cn.common.utils.DateUtils;
 import com.mylzs.cn.common.utils.MyException;
 import com.mylzs.cn.common.utils.SerurityUtils;
+import com.mylzs.cn.common.utils.page.PageQueryBean;
+import com.mylzs.cn.vo.QueryCondition;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 17/11/1.
@@ -65,7 +68,26 @@ public class AttendServiceImp implements  AttendService {
 
     }
 
+    /**
+     * 分页实现查询
+     * @param queryCondition
+     * @return
+     */
+    @Override
+    public PageQueryBean listAttend(QueryCondition queryCondition) {
+        //根据 条件 查询记录数
+     int count= attendMapper.conuntByCondition(queryCondition);
+        PageQueryBean pageQueryBean = new PageQueryBean();
 
-
+     if (count>0){
+         pageQueryBean.setTotalRows(count);
+         pageQueryBean.setCurrentPage(queryCondition.getCurrentPage());
+         pageQueryBean.setPageSize(queryCondition.getPageSize());
+      List<Attend> attends =   attendMapper.selectAttendPage(queryCondition);
+      pageQueryBean.setItems(attends);
+     }
+        //有记录才查询
+        return pageQueryBean;
+    }
 }
 

@@ -31,6 +31,30 @@
 
   </select>
 
+  <select id="conuntByCondition" parameterType="com.mylzs.cn.vo.QueryCondition" resultType="int">
+    SELECT
+    COUNT(0)
+    FROM  attend
+    WHERE uid=#{uid}
+<if test="startDate !=null and endDate !=null">
+  AND  attend_date BETWEEN #{startDate} AND #{endDate}
+</if>
+
+  </select>
+
+
+  <select id="selectAttendPage" parameterType="com.mylzs.cn.vo.QueryCondition"  resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM  attend
+    WHERE uid=#{uid}
+    <if test="startDate !=null and endDate !=null">
+      AND  attend_date BETWEEN #{startDate} AND #{endDate}
+    </if>
+
+    LIMIT #{startRow}, #{pageSize}
+
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from attend

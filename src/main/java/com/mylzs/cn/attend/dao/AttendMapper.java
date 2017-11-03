@@ -1,6 +1,9 @@
 package com.mylzs.cn.attend.dao;
 
 import com.mylzs.cn.attend.entity.Attend;
+import com.mylzs.cn.vo.QueryCondition;
+
+import java.util.List;
 
 public interface AttendMapper {
     int deleteByPrimaryKey(Integer attendId);
@@ -15,4 +18,8 @@ public interface AttendMapper {
 
     int updateByPrimaryKey(Attend record);
     Attend   selectTodaySingnRecord(Integer uid);
+
+    int conuntByCondition(QueryCondition queryCondition);
+
+    List<Attend> selectAttendPage(QueryCondition queryCondition);
 }

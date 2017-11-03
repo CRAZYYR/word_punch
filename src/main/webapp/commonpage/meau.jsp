@@ -89,9 +89,9 @@
     </nav>
 </header>
 <!-- Left side column. contains the logo and sidebar -->
-<aside class="main-sidebar">
+<aside class="main-sidebar" >
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+    <section class="sidebar" >
 
         <div class="user-panel">
             <div class="pull-left image">
@@ -125,7 +125,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="/attend/index.do"><i class="fa fa-circle-o"></i> 历史记录</a></li>
+                    <li class="active"><a href="/attend/index.do"><i class="fa fa-circle-o"></i>历史记录</a></li>
                     <li><a href="index2.html"><i class="fa fa-circle-o"></i>审批记录</a></li>
                 </ul>
             </li>

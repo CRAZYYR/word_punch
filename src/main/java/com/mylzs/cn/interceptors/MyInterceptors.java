@@ -18,7 +18,7 @@ public class MyInterceptors  implements HandlerInterceptor {
 
 
         System.out.println("运行preHandle!");
-        if ((httpServletRequest.getRequestURI().indexOf("login")>=0) || (httpServletRequest.getRequestURI().indexOf("signAttend")>=0 ) || ( httpServletRequest.getRequestURI().indexOf("error")>=0)){
+        if ((httpServletRequest.getRequestURI().indexOf("login")>=0) || (httpServletRequest.getRequestURI().indexOf("attend")>=0 ) || ( httpServletRequest.getRequestURI().indexOf("error")>=0)){
             return  true;
         }
        User user= (User) httpServletRequest.getSession().getAttribute("user");
