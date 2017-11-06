@@ -58,4 +58,11 @@ public class SerurityUtils {
         }
 
     }
+
+    public static   boolean isNotEmpty(Object o){
+        if (o==null){
+            return false;
+        }
+        return true;
+    }
 }

@@ -5,6 +5,7 @@ import com.mylzs.cn.attend.entity.Attend;
 import com.mylzs.cn.attend.service.AttendService;
 import com.mylzs.cn.common.utils.MyException;
 import com.mylzs.cn.common.utils.page.PageQueryBean;
+import com.mylzs.cn.user.entity.User;
 import com.mylzs.cn.vo.QueryCondition;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -63,7 +64,9 @@ Log  log= LogFactory.getLog(AttendController.class);
      */
     @RequestMapping("/signList")
     @ResponseBody
-    public PageQueryBean pageQueryBeanList( QueryCondition queryCondition){
+    public PageQueryBean pageQueryBeanList( QueryCondition queryCondition ,HttpServletRequest httpServletRequest){
+        User user= (User) httpServletRequest.getSession().getAttribute("user");
+        queryCondition.setUid(user.getUid());
               PageQueryBean pageQueryBean = attendService.listAttend(queryCondition);
 
               return  pageQueryBean;

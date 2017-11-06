@@ -19,7 +19,7 @@ public class DateUtils {
         Calendar calendar= Calendar.getInstance();
         calendar.setTime(new Date());
        int week= calendar.get(calendar.DAY_OF_WEEK)-1;
-       if (week<0){return 7;}
+       if (week<=0){return 7;}
    return  week;
     }
 

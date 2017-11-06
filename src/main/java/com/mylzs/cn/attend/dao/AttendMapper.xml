@@ -36,18 +36,54 @@
     COUNT(0)
     FROM  attend
     WHERE uid=#{uid}
+    <if test="attendStatus !=0">
+      AND  attend_status=#{attendStatus}
+    </if>
 <if test="startDate !=null and endDate !=null">
   AND  attend_date BETWEEN #{startDate} AND #{endDate}
 </if>
 
   </select>
 
+  <select id="selectTodayAbsence" resultType="int">
+    SELECT uid
+    FROM attend
+    WHERE uid NOT IN (
+    SELECT a.uid
+    FROM attend a WHERE  a.attend_date=CURDATE()
+    )
+
+
+  </select>
+
+  <insert id="batchInsert" parameterType="list">
+     insert into attend (uid, attend_date,
+      attend_week,absence, attend_status)
+    values
+     <foreach collection="list" item="item" index="index" separator=",">
+     (#{item.uid,jdbcType=INTEGER}, #{item.attendDate,jdbcType=DATE},
+      #{item.attendWeek,jdbcType=INTEGER}, #{item.absence,jdbcType=INTEGER}, #{item.attendStatus,jdbcType=INTEGER})
+     </foreach>
+  </insert>
+<select id="selectTodayEveningAbsence" resultMap="BaseResultMap">
+SELECT
+<include refid="Base_Column_List"/>
+  FROM attend
+  WHERE  attend_date=CURDATE()
+  AND  attend_evening IS NULL
+  AND  attend_status=1
+  AND  attend_week NOT IN (6,7)
+
+</select>
 
   <select id="selectAttendPage" parameterType="com.mylzs.cn.vo.QueryCondition"  resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
     FROM  attend
     WHERE uid=#{uid}
+    <if test="attendStatus !=0" >
+      AND  attend_status=#{attendStatus}
+    </if>
     <if test="startDate !=null and endDate !=null">
       AND  attend_date BETWEEN #{startDate} AND #{endDate}
     </if>

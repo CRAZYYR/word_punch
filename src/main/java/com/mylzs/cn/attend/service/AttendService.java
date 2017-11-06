@@ -16,4 +16,6 @@ public interface AttendService {
     public void   signAttend(Attend attend) throws  RuntimeException;
 
     PageQueryBean listAttend(QueryCondition queryCondition);
+
+    void checkAttend();
 }

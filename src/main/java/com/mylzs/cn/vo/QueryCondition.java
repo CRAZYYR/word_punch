@@ -2,14 +2,26 @@ package com.mylzs.cn.vo;
 
 import com.mylzs.cn.common.utils.page.PageQueryBean;
 
+import java.util.Date;
+
 /**
  * Created by Administrator on 17/11/3.
  */
 public class QueryCondition extends PageQueryBean {
-        private int uid;
+    private  int attendStatus;
+
+
+
+    private int uid;
     private  String startDate;
     private  String endDate;
+    public int getAttendStatus() {
+        return attendStatus;
+    }
 
+    public void setAttendStatus(int attendStatus) {
+        this.attendStatus = attendStatus;
+    }
     public String getStartDate() {
         return startDate;
     }
@@ -30,7 +42,9 @@ public class QueryCondition extends PageQueryBean {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setEndDate(String endDate)
+    {
+        Date date = new Date();
+        this.endDate  = (endDate == "")? date.toString():endDate;
     }
 }

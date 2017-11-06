@@ -7,12 +7,15 @@ import com.mylzs.cn.common.utils.MyException;
 import com.mylzs.cn.common.utils.SerurityUtils;
 import com.mylzs.cn.common.utils.page.PageQueryBean;
 import com.mylzs.cn.vo.QueryCondition;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +26,8 @@ import java.util.List;
 public class AttendServiceImp implements  AttendService {
     private static final int NOON_HOUR = 12;
     private static final int NOON_MUNITE = 30;
+    private static final Integer ABSENCE_DAY = 480;
+    private static final Integer ATTEND_STATUS_ABNORMAL = 2;
     private   SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm");
   private   Log log= LogFactory.getLog(AttendServiceImp.class);
     @Autowired
@@ -88,6 +93,39 @@ public class AttendServiceImp implements  AttendService {
      }
         //有记录才查询
         return pageQueryBean;
+    }
+
+    /**
+     * 定时任务
+     */
+    @Override
+    public void checkAttend() {
+        //查询缺勤用户  ID、插入打卡记录、并且设置为异常    缺勤480分钟
+        List<Integer> userIdList=attendMapper.selectTodayAbsence();
+        if (CollectionUtils.isNotEmpty(userIdList)){
+            List<Attend> attendList = new ArrayList<>();
+            for (Integer uid:userIdList){
+                Attend attend=new Attend();
+                attend.setUid(uid);
+                attend.setAttendDate(new Date());
+                attend.setAttendWeek(DateUtils.getTodayWeek());
+                attend.setAbsence(ABSENCE_DAY);
+                attend.setAttendStatus(ATTEND_STATUS_ABNORMAL);
+                attendList.add(attend);
+            }
+            attendMapper.batchInsert(attendList);
+        }
+
+        List<Attend> absenceList=attendMapper.selectTodayEveningAbsence();
+        if ( CollectionUtils.isNotEmpty(absenceList)){
+            for (Attend attend:absenceList){
+                attend.setAbsence(ABSENCE_DAY);
+                attend.setAttendStatus(ATTEND_STATUS_ABNORMAL);
+                attendMapper.updateByPrimaryKeySelective(attend);
+            }
+
+        }
+
     }
 }
 

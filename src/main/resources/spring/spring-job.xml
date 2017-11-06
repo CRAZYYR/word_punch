@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="checkTask" class="com.mylzs.cn.common.utils.task.AttendCheckTask"></bean>
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="checkTask"></property>
+        <property name="targetMethod" value="checkAttend"></property>
+
+    </bean>
+    <bean id="MyTimerTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail"></property>
+        <property name="cronExpression">
+            <value>0/10 * * * * ?</value>
+        </property>
+    </bean>
+    <bean autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="MyTimerTrigger"/>
+            </list>
+        </property>
+        <!--<property name="quartzProperties">-->
+            <!--<props>-->
+                <!--<prop key="org.quartz.scheduler.skipUpdateCheck">true</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    </bean>
+</beans>
