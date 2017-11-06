@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -41,6 +42,7 @@ public class ReAttendController {
      * @return
      */
     @RequestMapping("/list")
+    @ResponseBody
     public List<Task> listReAttendFlow(Map varibles)
     {
         List<Task> tasks=reAttendService.listTask("老刘");
