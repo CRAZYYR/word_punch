@@ -97,6 +97,7 @@
         <property name="mailServerPassword" value="000000"/>
         <property name="mailServerPort" value="2025"/>
 
+
         <!-- UUID作为主键生成策略
         <property name="idGenerator" ref="uuidGenerator" />
         -->
@@ -113,7 +114,7 @@
         <!-- 自动部署 -->
         <property name="deploymentResources">
             <list>
-                <!--<value>classpath*:/deployments/*.bpmn20.xml</value>-->
+                <value>classpath*:workflow/*.bpmn</value>
             </list>
         </property>
 

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mylzs.cn.workflow.dao.ReAttendMapper" >
+  <resultMap id="BaseResultMap" type="com.mylzs.cn.workflow.entity.ReAttend" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="attend_id" property="attendId" jdbcType="INTEGER" />
+    <result column="re_attend_start" property="reAttendStart" jdbcType="VARCHAR" />
+    <result column="re_attend_even" property="reAttendEven" jdbcType="TIME" />
+    <result column="re_attend_mor" property="reAttendMor" jdbcType="TIME" />
+    <result column="current_handler" property="currentHandler" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="comments" property="comments" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, attend_id, re_attend_start, re_attend_even, re_attend_mor, current_handler, status, 
+    comments
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from re_attend
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from re_attend
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mylzs.cn.workflow.entity.ReAttend" >
+    insert into re_attend (id, attend_id, re_attend_start, 
+      re_attend_even, re_attend_mor, current_handler, 
+      status, comments)
+    values (#{id,jdbcType=INTEGER}, #{attendId,jdbcType=INTEGER}, #{reAttendStart,jdbcType=VARCHAR}, 
+      #{reAttendEven,jdbcType=TIME}, #{reAttendMor,jdbcType=TIME}, #{currentHandler,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{comments,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mylzs.cn.workflow.entity.ReAttend" >
+    insert into re_attend
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="attendId != null" >
+        attend_id,
+      </if>
+      <if test="reAttendStart != null" >
+        re_attend_start,
+      </if>
+      <if test="reAttendEven != null" >
+        re_attend_even,
+      </if>
+      <if test="reAttendMor != null" >
+        re_attend_mor,
+      </if>
+      <if test="currentHandler != null" >
+        current_handler,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="comments != null" >
+        comments,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="attendId != null" >
+        #{attendId,jdbcType=INTEGER},
+      </if>
+      <if test="reAttendStart != null" >
+        #{reAttendStart,jdbcType=VARCHAR},
+      </if>
+      <if test="reAttendEven != null" >
+        #{reAttendEven,jdbcType=TIME},
+      </if>
+      <if test="reAttendMor != null" >
+        #{reAttendMor,jdbcType=TIME},
+      </if>
+      <if test="currentHandler != null" >
+        #{currentHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="comments != null" >
+        #{comments,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mylzs.cn.workflow.entity.ReAttend" >
+    update re_attend
+    <set >
+      <if test="attendId != null" >
+        attend_id = #{attendId,jdbcType=INTEGER},
+      </if>
+      <if test="reAttendStart != null" >
+        re_attend_start = #{reAttendStart,jdbcType=VARCHAR},
+      </if>
+      <if test="reAttendEven != null" >
+        re_attend_even = #{reAttendEven,jdbcType=TIME},
+      </if>
+      <if test="reAttendMor != null" >
+        re_attend_mor = #{reAttendMor,jdbcType=TIME},
+      </if>
+      <if test="currentHandler != null" >
+        current_handler = #{currentHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="comments != null" >
+        comments = #{comments,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mylzs.cn.workflow.entity.ReAttend" >
+    update re_attend
+    set attend_id = #{attendId,jdbcType=INTEGER},
+      re_attend_start = #{reAttendStart,jdbcType=VARCHAR},
+      re_attend_even = #{reAttendEven,jdbcType=TIME},
+      re_attend_mor = #{reAttendMor,jdbcType=TIME},
+      current_handler = #{currentHandler,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      comments = #{comments,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
