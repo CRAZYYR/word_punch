@@ -1,12 +1,15 @@
 package com.mylzs.cn.workflow.controller;
 
+import com.mylzs.cn.workflow.entity.ReAttend;
 import com.mylzs.cn.workflow.service.ReAttendService;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -21,13 +24,15 @@ public class ReAttendController {
 
     /**
      * 开启工作流
-     * @param varibles
+     * @param reAttend
+     * @param httpSession
      */
     @RequestMapping("/start")
-     public  void  startReAttendFlow(Map varibles)
+     public  void  startReAttendFlow(@RequestBody ReAttend  reAttend, HttpSession httpSession)
      {
 
-         reAttendService.startReAttendFlow(varibles);
+         reAttend.setReAttendStart("shuaizi");
+         reAttendService.startReAttendFlow(reAttend);
      }
 
     /**
@@ -38,17 +43,17 @@ public class ReAttendController {
     @RequestMapping("/list")
     public List<Task> listReAttendFlow(Map varibles)
     {
-        List<Task> tasks=reAttendService.listTask(varibles);
+        List<Task> tasks=reAttendService.listTask("老刘");
         return  tasks;
     }
 
     /**
-     *
-     * @param taskId
+     * 审批
+     * @param reAttend
      */
-    @RequestMapping("/approve/{taskId}")
-    public  void  approveReAttendFlow(@PathVariable String taskId)
+    @RequestMapping("/approve")
+    public  void  approveReAttendFlow(@RequestBody ReAttend reAttend)
     {
-        reAttendService.approveReAttendFlow(taskId);
+        reAttendService.approveReAttendFlow(reAttend);
     }
 }

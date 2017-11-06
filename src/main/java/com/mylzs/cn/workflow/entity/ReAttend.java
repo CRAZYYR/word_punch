@@ -16,6 +16,24 @@ public class ReAttend {
     private String currentHandler;
 
     private Integer status;
+    private String taskId;
+    private  String approveFlag;
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getApproveFlag() {
+        return approveFlag;
+    }
+
+    public void setApproveFlag(String approveFlag) {
+        this.approveFlag = approveFlag;
+    }
 
     private String comments;
 

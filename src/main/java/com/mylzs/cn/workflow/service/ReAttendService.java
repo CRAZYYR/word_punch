@@ -12,9 +12,10 @@ import java.util.Map;
  */
 public interface ReAttendService {
 
-    void startReAttendFlow(Map varibles);
-//void startReAttendFlow(ReAttend reAttend);
-    List<Task> listTask(Map varibles);
-
-    void approveReAttendFlow(String taskId);
+//    void startReAttendFlow(Map varibles);
+void startReAttendFlow(ReAttend reAttend);
+//    List<Task> listTask(Map varibles);
+    List<Task> listTask(String username);
+//    void approveReAttendFlow(String taskId);
+void approveReAttendFlow(ReAttend reAttendS);
 }
