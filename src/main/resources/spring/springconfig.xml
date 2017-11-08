@@ -82,6 +82,8 @@
 </bean>
     <!--定时任务-->
 <import resource="spring-job.xml"></import>
+
+    <import resource="spring-shiro.xml"></import>
     <!--Activity工作流-->
     <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
 
@@ -110,6 +112,7 @@
         <property name="processDefinitionCache">
             <bean class="me.kafeitu.demo.activiti.util.cache.DistributedCache" />
         </property>-->
+
 
         <!-- 自动部署 -->
         <property name="deploymentResources">
